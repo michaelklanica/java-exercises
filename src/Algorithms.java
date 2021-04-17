@@ -10,6 +10,12 @@ public class Algorithms {
 //        EXERCISE 2:
         System.out.println(reverseInt(1234567890));
 
+//        EXERCISE 3:
+        System.out.println(isPalindrome(181));
+        System.out.println(isPalindrome(123));
+
+//        EXERCISE 4:
+        System.out.println(romanToInt("MCMLXXV"));
 
     }
 
@@ -42,6 +48,57 @@ public class Algorithms {
         }
         if (outNum > Integer.MAX_VALUE || outNum < Integer.MIN_VALUE) return 0;
         return (int) outNum;
+    }
+
+//    EXERCISE 3 (APAS 9)
+//    DETERMINE WHETHER AN INTEGER IS A PALINDROME.
+
+    public static boolean isPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+        int revertedNumber = 0;
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x/= 10;
+        }
+        return x ==revertedNumber || x == revertedNumber/10;
+
+    }
+
+//    EXERCISE 4 (APAS 13)
+//    CONVERT ROMAN NUMERAL TO INTEGER
+
+    public static int romanToInt(String s) {
+        int result = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            switch (s.charAt(i)) {
+                case 'M':
+                    result += 1000;
+                    break;
+                case 'D':
+                    result += 500;
+                    break;
+                case 'C':
+                    result += 100 * (result >= 500 ? -1 : 1);
+                    break;
+                case 'L':
+                    result += 50;
+                    break;
+                case 'X':
+                    result += 10 * (result >= 50 ? -1 : 1);
+                    break;
+                case 'V':
+                    result += 5;
+                    break;
+                case 'I':
+                    result += (result >= 5 ? -1 : 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return result;
     }
 
 
